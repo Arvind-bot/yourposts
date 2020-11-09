@@ -5,16 +5,19 @@ import LoginPage from './pages/loginpage/loginpage.component';
 import UserPostsPage from "./pages/userpostspage/userpostspage.component";
 
 import {Route, Switch} from "react-router-dom";
+import {connect} from "react-redux";
 
-function App() {
+function App({currentUser}) {
   return (
     <div>
     <Switch>
-      <Route exact path="/" component={LoginPage}/>
-      <Route path="/userposts" component={UserPostsPage}/>
+      <Route exact path="/" render={()=>currentUser?(<UserPostsPage/>):(<LoginPage/>)}/>
     </Switch>
+    <h4>heinz-georg.fiedler@example.com</h4>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps=({user})=>({currentUser:user.currentUser});
+
+export default connect(mapStateToProps)(App);
