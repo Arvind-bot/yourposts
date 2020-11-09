@@ -28,13 +28,13 @@ class LoginPage extends React.Component {
     })
       .then((response) => response.json())
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         return data.filter(
           (user) => user.email.toLowerCase() === this.state.email.toLowerCase()
         )[0];
       })
       .then((requiredUser) => {
-        console.log(requiredUser);
+        // console.log(requiredUser);
         if (requiredUser === undefined || requiredUser.length === 0) {
           this.setState({
             isEmailInvalid: true,
