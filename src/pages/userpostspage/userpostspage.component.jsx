@@ -30,6 +30,7 @@ import {
 
 import { ReactComponent as Delete } from "./trash-can.svg";
 import ModalStateManager from "../../components/modal/modal.component";
+import { PostImage } from "../../components/post-image/post-image.component";
 
 class UserPostsPage extends React.Component {
   componentDidMount() {
@@ -54,7 +55,7 @@ class UserPostsPage extends React.Component {
           },
           {
             key: "imageLink",
-            header: "Image Link",
+            header: "Image",
           },
           {
             key: "caption",
@@ -66,7 +67,7 @@ class UserPostsPage extends React.Component {
           },
         ];
         setPostsTableHeader(headers);
-        const rows = data.map(({ id, image, publishDate, text, likes }) => ({
+        const rows = data.map(({ id, image, text, likes }) => ({
           id: id,
           postId: id,
           imageLink: image,
@@ -113,7 +114,7 @@ class UserPostsPage extends React.Component {
                     description=""
                     {...getTableContainerProps()}
                   >
-                    <TableToolbar>
+                    <TableToolbar {...getToolbarProps()}>
                       <TableBatchActions {...getBatchActionProps()}>
                         <TableBatchAction
                           tabIndex={
@@ -133,7 +134,7 @@ class UserPostsPage extends React.Component {
                         {/* pass in `onInputChange` change here to make filtering work */}
                         <TableToolbarSearch onChange={onInputChange} />
                         
-                        <Button>Add Row</Button>
+                        <ModalStateManager />
                       </TableToolbarContent>
                     </TableToolbar>
 
@@ -155,9 +156,7 @@ class UserPostsPage extends React.Component {
                             {row.cells.map((cell) => (
                               <TableCell key={cell.id}>
                                 {cell.info.header === "imageLink" ? (
-                                  <Link className="row-link" href={cell.value}>
-                                    {cell.value}
-                                  </Link>
+                                  <PostImage imageUrl={cell.value}/>
                                 ) : (
                                   cell.value
                                 )}

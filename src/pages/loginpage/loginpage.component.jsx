@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, TextInput } from "carbon-components-react";
-import {setCurrentUser} from "../../redux/user/user.action";
-import {connect} from "react-redux";
+import { setCurrentUser } from "../../redux/user/user.action";
+import { connect } from "react-redux";
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -16,7 +16,7 @@ class LoginPage extends React.Component {
 
   handleChange = (e) => {
     const name = e.target.name;
-    this.setState({ [name]: e.target.value, isEmailInvalid:false });
+    this.setState({ [name]: e.target.value, isEmailInvalid: false });
   };
 
   handleClick = (e) => {
@@ -34,63 +34,88 @@ class LoginPage extends React.Component {
         )[0];
       })
       .then((requiredUser) => {
-        // console.log(requiredUser);
         if (requiredUser === undefined || requiredUser.length === 0) {
           this.setState({
             isEmailInvalid: true,
             emailInvalidText: "Enter valid Email ID",
           });
         } else {
-          this.props.setCurrentUser(requiredUser)
+          this.props.setCurrentUser(requiredUser);
         }
       });
   };
 
   render() {
     return (
-      <div className="loginpage">
-        <h1 className="heading">View Your Posts</h1>
-        <div className="input-box">
-          <TextInput
-            id="email-input"
-            className="text-input"
-            type="email"
-            helperText=""
-            invalid={this.state.isEmailInvalid}
-            invalidText={this.state.emailInvalidText}
-            labelText="Email"
-            placeholder="Enter Email"
-            name="email"
-            onChange={this.handleChange}
-            //   rows={4}
-          />
+      <div>
+        <div className="note">
+          <h4>NOTE: user any of these mailID's for test puposes</h4>
+          <br />
+          <p>heinz-georg.fiedler@example.com</p>
+          <p>katie.hughes@example.com</p>
+          <p>vetle.aasland@example.com</p>
+          <p>dylan.vasquez@example.com</p>
+          <p>margarita.vicente@example.com</p>
+          <p>joey.oliver@example.com</p>
+          <p>lilja.lampinen@example.com</p>
+          <p>abigail.liu@example.com</p>
+          <p>melanie.pilz@example.com</p>
+          <p>evan.carlson@example.com</p>
+          <p>kitty.steward@example.com</p>
+          <p>vanessa.ramos@example.com</p>
+          <p>olai.gomes@example.com</p>
+          <p>constance.bourgeois@example.com</p>
+          <p>kenneth.carter@example.com</p>
+          <p>sigmund.myran@example.com</p>
+          <p>josefina.calvo@example.com</p>
+          <p>annabel.somby@example.com</p>
+          <p>friedrich-karl.brand@example.com</p>
+          <p>sibylle.leibold@example.com</p>
         </div>
-        <div className="input-box">
-          <TextInput
-            id="password-input"
-            className="text-input"
-            type="password"
-            //   cols={50}
-            helperText=""
-            invalidText="Invalid error message."
-            labelText="Password"
-            placeholder="Enter Password"
-            name="password"
-            onChange={this.handleChange}
-            //   rows={4}
-          />
-        </div>
+        <div className="loginpage">
+          <h2 className="heading">Manage Your Posts</h2>
+          <div className="input-box">
+            <TextInput
+              id="email-input"
+              className="text-input"
+              type="email"
+              helperText=""
+              invalid={this.state.isEmailInvalid}
+              invalidText={this.state.emailInvalidText}
+              labelText="Email"
+              placeholder="Enter Email"
+              name="email"
+              onChange={this.handleChange}
+              //   rows={4}
+            />
+          </div>
+          <div className="input-box">
+            <TextInput
+              id="password-input"
+              className="text-input"
+              type="password"
+              //   cols={50}
+              helperText=""
+              invalidText="Invalid error message."
+              labelText="Password"
+              placeholder="Enter Password"
+              name="password"
+              onChange={this.handleChange}
+              //   rows={4}
+            />
+          </div>
 
-        <Button kind="secondary" onClick={this.handleClick}>
-          Submit
-        </Button>
+          <Button kind="primary" onClick={this.handleClick}>
+            Submit
+          </Button>
+        </div>
       </div>
     );
   }
 }
 
-const mapDispatchToProps=dispatch=>({
-  setCurrentUser:user=>dispatch(setCurrentUser(user))
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
-export default connect(null,mapDispatchToProps)(LoginPage);
+export default connect(null, mapDispatchToProps)(LoginPage);

@@ -13,7 +13,6 @@ function App({currentUser}) {
     <Switch>
       <Route exact path="/" render={()=>currentUser?(<UserPostsPage/>):(<LoginPage/>)}/>
     </Switch>
-    <h4>heinz-georg.fiedler@example.com</h4>
     </div>
   );
 }

@@ -20,3 +20,12 @@
 .input-box{
     margin-bottom: 15px;
 }
+
+.note{
+    & h4{
+        color: red;
+        padding:0 ;
+        margin: 0;
+    }
+    margin-left: 15px;
+}

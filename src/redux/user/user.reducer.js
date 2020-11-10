@@ -3,6 +3,8 @@ import { UserActionTypes } from "./user.types";
 const INITIAL_STATE = {
   currentUser: null,
   userPosts: [],
+  headers:[],
+  rows:[]
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
