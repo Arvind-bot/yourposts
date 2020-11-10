@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import "./userpostspage.styles.scss";
-import {
-  setCurrentUserPosts,
-  setPostsTableHeader,
-  setPostsTableRows,
-} from "../../redux/user/user.action";
+import { setCurrentUserPosts } from "../../redux/userPosts/userPosts.actions";
+import { setPostsTableHeader } from "../../redux/dataTableHeader/dataTableHeader.actions";
+import { setPostsTableRows } from "../../redux/dataTableRows/dataTableRows.actions";
+
+import { CreateTable } from "../../components/create-table/create-table.component";
+
 import {
   DataTable,
   Table,
@@ -28,7 +29,7 @@ import {
   TableSelectRow,
 } from "carbon-components-react";
 
-import { ReactComponent as Delete } from "./trash-can.svg";
+import { ReactComponent as Delete } from "../../assets/trash-can.svg";
 import ModalStateManager from "../../components/modal/modal.component";
 import { PostImage } from "../../components/post-image/post-image.component";
 
@@ -67,7 +68,7 @@ class UserPostsPage extends React.Component {
           },
         ];
         setPostsTableHeader(headers);
-        const rows = data.map(({ id, image, text, likes }) => ({
+        const rows=data.map(({ id, image, text, likes }) => ({
           id: id,
           postId: id,
           imageLink: image,
@@ -75,12 +76,10 @@ class UserPostsPage extends React.Component {
           likes: likes,
         }));
         setPostsTableRows(rows);
-        //   console.log(rows);
-        //   console.log(header);
-      });
+      })  
   }
 
-  batchActionClick = (selectedRows) => {
+  deleteSelectedRows = (selectedRows) => {
     const { setPostsTableRows, rows } = this.props;
     const filteredPosts = rows.filter(
       (row) => !selectedRows.some((selectedRow) => row.id === selectedRow.id)
@@ -90,12 +89,11 @@ class UserPostsPage extends React.Component {
 
   render() {
     const { rows, headers } = this.props;
+    // console.log(rows);
     return (
       <div className="userpostpage">
         <div className="data-table">
-          {rows ? (
-            headers ? (
-              <DataTable  rows={rows} headers={headers}>
+        <DataTable  rows={rows} headers={headers}>
                 {({
                   rows,
                   headers,
@@ -123,17 +121,14 @@ class UserPostsPage extends React.Component {
                               : -1
                           }
                           renderIcon={Delete}
-                          onClick={() => this.batchActionClick(selectedRows)}
+                          onClick={() => this.deleteSelectedRows(selectedRows)}
                         >
                           Delete
                         </TableBatchAction>
-                        {/* <Button onClick={()=>this.batchActionClick(selectedRows)}>Delete</Button> */}
                       </TableBatchActions>
 
                       <TableToolbarContent>
-                        {/* pass in `onInputChange` change here to make filtering work */}
                         <TableToolbarSearch onChange={onInputChange} />
-                        
                         <ModalStateManager />
                       </TableToolbarContent>
                     </TableToolbar>
@@ -169,8 +164,6 @@ class UserPostsPage extends React.Component {
                   </TableContainer>
                 )}
               </DataTable>
-            ) : null
-          ) : null}
         </div>
       </div>
     );
@@ -178,7 +171,10 @@ class UserPostsPage extends React.Component {
 }
 
 const mapStateToProps = ({
-  user: { currentUser, userPosts, headers, rows },
+  user: { currentUser },
+  userPosts: { userPosts },
+  dataTableHeader: { headers },
+  dataTableRows: {rows},
 }) => ({
   currentUser,
   userPosts,

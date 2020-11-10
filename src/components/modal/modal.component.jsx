@@ -2,9 +2,8 @@ import { Form } from "carbon-components-react";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./modal.styles.scss";
-import { setPostsTableRows } from "../../redux/user/user.action";
+import { setPostsTableRows } from "../../redux/dataTableRows/dataTableRows.actions";
 
-// import { ComposedModal,ModalHeader,ModalBody } from "../composed-modal/composed-modal.component";
 import {
   Button,
   TextInput,
@@ -27,7 +26,6 @@ class ModalStateManager extends React.Component {
     };
   }
 
-  // const [open, setOpen] = useState(false);
 
   setOpen = (setValue) => {
     this.setState({ open: setValue });
@@ -38,10 +36,9 @@ class ModalStateManager extends React.Component {
     this.setState({ [name]: value });
   };
 
-  handleClick = () => {
+  addRow = () => {
     const { postId, imageLink, caption } = this.state;
     const { setPostsTableRows, rows } = this.props;
-    console.log(rows);
     const row = {
       id: postId,
       postId: postId,
@@ -49,7 +46,6 @@ class ModalStateManager extends React.Component {
       caption: caption,
       likes: 0,
     };
-    console.log(rows);
     setPostsTableRows([...rows, row]);
     this.setOpen(false);
   };
@@ -105,7 +101,7 @@ class ModalStateManager extends React.Component {
                   </div>
                 </ModalBody>
                 <ModalFooter>
-                  <Button kind="primary" onClick={this.handleClick}>
+                  <Button kind="primary" onClick={this.addRow}>
                     Add
                   </Button>
                 </ModalFooter>
@@ -120,7 +116,7 @@ class ModalStateManager extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user: { rows } }) => ({
+const mapStateToProps = ({ dataTableRows: {rows} }) => ({
   rows,
 });
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, TextInput } from "carbon-components-react";
-import { setCurrentUser } from "../../redux/user/user.action";
+import { setCurrentUser } from "../../redux/user/user.actions";
 import { connect } from "react-redux";
 class LoginPage extends React.Component {
   constructor(props) {
@@ -79,14 +79,12 @@ class LoginPage extends React.Component {
               id="email-input"
               className="text-input"
               type="email"
-              helperText=""
               invalid={this.state.isEmailInvalid}
               invalidText={this.state.emailInvalidText}
               labelText="Email"
               placeholder="Enter Email"
               name="email"
               onChange={this.handleChange}
-              //   rows={4}
             />
           </div>
           <div className="input-box">
@@ -94,19 +92,16 @@ class LoginPage extends React.Component {
               id="password-input"
               className="text-input"
               type="password"
-              //   cols={50}
-              helperText=""
               invalidText="Invalid error message."
               labelText="Password"
               placeholder="Enter Password"
               name="password"
               onChange={this.handleChange}
-              //   rows={4}
             />
           </div>
 
           <Button kind="primary" onClick={this.handleClick}>
-            Submit
+            Login
           </Button>
         </div>
       </div>
