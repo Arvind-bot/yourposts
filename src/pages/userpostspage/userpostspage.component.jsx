@@ -5,7 +5,6 @@ import { setCurrentUserPosts } from "../../redux/userPosts/userPosts.actions";
 import { setPostsTableHeader } from "../../redux/dataTableHeader/dataTableHeader.actions";
 import { setPostsTableRows } from "../../redux/dataTableRows/dataTableRows.actions";
 
-import { CreateTable } from "../../components/create-table/create-table.component";
 
 import {
   DataTable,
@@ -15,16 +14,12 @@ import {
   TableHeader,
   TableBody,
   TableCell,
-  Link,
   TableToolbar,
-  TableToolbarAction,
   TableToolbarSearch,
   TableToolbarContent,
-  TableToolbarMenu,
   TableBatchActions,
   TableBatchAction,
   TableContainer,
-  Button,
   TableSelectAll,
   TableSelectRow,
 } from "carbon-components-react";
